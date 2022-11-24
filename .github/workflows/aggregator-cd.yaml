@@ -1,0 +1,44 @@
+name: aggregator-cd
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - "aggregator/**"
+
+jobs:
+  cd:
+    name: aggregator-cd
+    if: |
+      github.event.pull_request.merged &&
+      github.event.pull_request.user.login != 'github-actions'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+        working-directory: ./aggregator
+
+      - name: Setup Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+
+      - name: Install dependencies
+        run: yarn install --nonInteractive --frozen-lockfile --prefer-offline
+        working-directory: ./aggregator
+
+      - name: Build
+        run: yarn build
+        working-directory: ./aggregator
+
+      - name: Deploy
+        run: yarn deploy
+        working-directory: ./aggregator
+
+      - name: PR New URI
+        uses: peter-evans/create-pull-request@v3
