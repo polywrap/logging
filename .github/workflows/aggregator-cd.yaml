@@ -42,3 +42,8 @@ jobs:
 
       - name: PR New URI
         uses: peter-evans/create-pull-request@v3
+        with:
+          branch: aggregator-cd-pr-${{github.event.number}}
+          commit-message: "[CD] logger-wrapper"
+          title: "[CD] logger-wrapper"
+          body: "Triggered by: https://github.com/${{github.repository}}/pull/${{github.event.number}}"
