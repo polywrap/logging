@@ -32,7 +32,7 @@ type Module implements ILogger_Module { }
 And implement the `log` method within your programming language of choice.
 
 ## Known Implementations
-* [`@polywrap/logger-plugin-js`](https://www.npmjs.com/package/@polywrap/logger-plugin-js) - JavaScript Plugin
+* [`@polywrap/logger-plugin-js`](https://www.npmjs.com/package/@polywrap/logger-plugin-js) - JavaScript Plugin  
 
 ## Known Aggregators
-* `logging-wrapper` @ [`ens/wrappers.polywrap.eth:logging@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logging@1.0.0) - Wasm Wrapper
+* `logging-wrapper` @ [`ens/wrappers.polywrap.eth:logging@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logging@1.0.0) - Wasm Wrapper  
