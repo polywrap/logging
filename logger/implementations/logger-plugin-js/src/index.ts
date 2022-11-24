@@ -49,4 +49,5 @@ export class LoggerPlugin extends Module<LoggerPluginConfig> {
 export const loggerPlugin: PluginFactory<LoggerPluginConfig> = (
   config: LoggerPluginConfig
 ) => new PluginPackage(new LoggerPlugin(config), manifest);
+
 export const plugin = loggerPlugin;

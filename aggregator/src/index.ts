@@ -15,7 +15,7 @@ function log(args: Args_log): bool {
   for (let i = 0; i < uris.length; i++) {
     new Logger_Module(uris[i]).log({
       message: args.message,
-      level: args.level
+      level: args.level,
     }).unwrap();
   }
   return true;
@@ -24,28 +24,28 @@ function log(args: Args_log): bool {
 export function debug(args: Args_debug): bool {
   return log({
     message: args.message,
-    level: Logger_LogLevel.DEBUG
+    level: Logger_LogLevel.DEBUG,
   });
 }
 
 export function info(args: Args_info): bool {
   return log({
     message: args.message,
-    level: Logger_LogLevel.INFO
+    level: Logger_LogLevel.INFO,
   });
 }
 
 export function warn(args: Args_warn): bool {
   return log({
     message: args.message,
-    level: Logger_LogLevel.WARN
+    level: Logger_LogLevel.WARN,
   });
 }
 
 export function error(args: Args_error): bool {
   return log({
     message: args.message,
-    level: Logger_LogLevel.ERROR
+    level: Logger_LogLevel.ERROR,
   });
 }
 
