@@ -42,3 +42,9 @@ jobs:
 
       - name: PR New URI
         uses: peter-evans/create-pull-request@v3
+        with:
+          branch: interface-cd-pr-${{github.event.number}}
+          commit-message: "[CD] logger-interface"
+          title: "[CD] logger-interface"
+          body: "Triggered by: https://github.com/${{github.repository}}/pull/${{github.event.number}}"
+
