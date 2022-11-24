@@ -9,12 +9,13 @@
   "files": [
     "build"
   ],
-  "version": "0.10.0-pre.5",
+  "version": "0.10.0",
   "main": "build/index.js",
   "scripts": {
     "build": "rimraf ./build && yarn codegen && tsc",
     "codegen": "polywrap codegen",
-    "test": "jest --passWithNoTests --runInBand --verbose"
+    "test": "jest --passWithNoTests --runInBand --verbose",
+    "publish:npm": "yarn publish --access public --non-interactive --verbose"
   },
   "dependencies": {
     "@polywrap/core-js": "0.10.0-pre.5",
