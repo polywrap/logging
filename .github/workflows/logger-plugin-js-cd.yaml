@@ -2,6 +2,7 @@ name: logger-plugin-js-cd
 
 on:
   pull_request:
+    types: [closed]
     paths:
       - "logger/implementations/logger-plugin-js/**"
 
