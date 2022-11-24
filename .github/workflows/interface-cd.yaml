@@ -47,4 +47,3 @@ jobs:
           commit-message: "[CD] logger-interface"
           title: "[CD] logger-interface"
           body: "Triggered by: https://github.com/${{github.repository}}/pull/${{github.event.number}}"
-
