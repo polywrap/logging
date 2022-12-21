@@ -9,7 +9,7 @@
   "files": [
     "build"
   ],
-  "version": "0.10.0",
+  "version": "0.10.0-pre.6",
   "main": "build/index.js",
   "scripts": {
     "build": "rimraf ./build && yarn codegen && tsc",
@@ -18,15 +18,15 @@
     "publish:npm": "yarn publish --access public --non-interactive --verbose"
   },
   "dependencies": {
-    "@polywrap/core-js": "0.10.0-pre.5",
-    "@polywrap/plugin-js": "0.10.0-pre.5"
+    "@polywrap/core-js": "0.10.0-pre.6",
+    "@polywrap/plugin-js": "0.10.0-pre.6"
   },
   "devDependencies": {
-    "@polywrap/client-js": "0.10.0-pre.5",
-    "@polywrap/uri-resolvers-js": "0.10.0-pre.5",
+    "@polywrap/client-js": "0.10.0-pre.6",
+    "@polywrap/uri-resolvers-js": "0.10.0-pre.6",
     "@types/jest": "26.0.8",
     "jest": "26.6.3",
-    "polywrap": "0.10.0-pre.5",
+    "polywrap": "0.10.0-pre.6",
     "rimraf": "3.0.2",
     "ts-jest": "26.5.4",
     "ts-node": "8.10.2",
