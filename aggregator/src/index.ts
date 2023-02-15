@@ -1,7 +1,7 @@
 import {
   Logger,
   Logger_Module,
-  Logger_Logger_LogLevel as Logger_LogLevel,
+  Logger_LogLevel,
   Args_debug,
   Args_info,
   Args_warn,

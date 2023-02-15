@@ -1,7 +1,7 @@
 import { PolywrapClient } from "@polywrap/client-js";
 
 import { loggerPlugin, LogFunc } from "../..";
-import { Logger_Logger_LogLevel as Logger_LogLevel } from "../../wrap";
+import { Logger_LogLevel } from "../../wrap";
 
 const console_log = jest.spyOn(console, "log");
 const console_debug = jest.spyOn(console, "debug");
