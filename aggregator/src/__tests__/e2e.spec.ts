@@ -1,9 +1,18 @@
 import { PolywrapClient } from "@polywrap/client-js";
 import { PluginPackage } from "@polywrap/plugin-js";
+import { WasmPackage } from "@polywrap/wasm-js";
+import { ClientConfigBuilder } from "@polywrap/client-config-builder-js";
+import path from "path";
+import fs from "fs";
 
 describe("logging wrapper", () => {
 
-  const wrapperUri = "file/./build/";
+  const wrapperDir = path.join(__dirname, "../../build/");
+  const wrapper = WasmPackage.from(
+    fs.readFileSync(path.join(wrapperDir, "wrap.info")),
+    fs.readFileSync(path.join(wrapperDir, "wrap.wasm"))
+  );
+  const wrapperUri = "test/wrapper";
   const pluginUri1 = "wrap://plugin/logger-1";
   const pluginUri2 = "wrap://plugin/logger-2";
   const interfaceUri = "ens/wraps.eth:logger@1.0.0";
@@ -16,22 +25,31 @@ describe("logging wrapper", () => {
       },
     }));
 
-    return new PolywrapClient({
-      packages: [
-        {
-          uri: pluginUri1,
-          package: loggerPlugin
-        },
-        {
-          uri: pluginUri2,
-          package: loggerPlugin
-        }
-      ],
-      interfaces: [{
-        interface: interfaceUri,
-        implementations: [pluginUri1, pluginUri2]
-      }]
-    });
+    const configBuilder = new ClientConfigBuilder();
+
+    configBuilder.addPackages([
+      {
+        uri: wrapperUri,
+        package: wrapper
+      },
+      {
+        uri: pluginUri1,
+        package: loggerPlugin
+      },
+      {
+        uri: pluginUri2,
+        package: loggerPlugin
+      }
+    ]);
+    configBuilder.addInterfaceImplementations(
+      interfaceUri,
+      [pluginUri1, pluginUri2]
+    );
+
+    return new PolywrapClient(
+      configBuilder.buildCoreConfig(),
+      { noDefaults: true }
+    );
   }
 
   it("dispatches message to all loggers", async () => {
@@ -97,7 +115,18 @@ describe("logging wrapper", () => {
   });
 
   it("succeeds if no loggers are found", async () => {
-    const client = new PolywrapClient();
+    const configBuilder = new ClientConfigBuilder();
+    configBuilder.addPackages([
+      {
+        uri: wrapperUri,
+        package: wrapper
+      }
+    ]);
+
+    const client = new PolywrapClient(
+      configBuilder.buildCoreConfig(),
+      { noDefaults: true }
+    );
 
     const impls = await client.invoke<string[]>({
       uri: wrapperUri,

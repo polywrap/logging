@@ -1,8 +1,8 @@
 import {
   Module,
   Args_log,
-  Logger_LogLevel,
-  Logger_LogLevelEnum,
+  Logger_Logger_LogLevel as Logger_LogLevel,
+  Logger_Logger_LogLevelEnum as Logger_LogLevelEnum,
   manifest,
 } from "./wrap";
 
