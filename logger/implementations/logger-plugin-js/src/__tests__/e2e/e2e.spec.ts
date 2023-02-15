@@ -11,7 +11,7 @@ const console_error = jest.spyOn(console, "error");
 describe("loggerPlugin", () => {
 
   const pluginUri = "plugin/logger";
-  const interfaceUri = "ens/wrappers.polywrap.eth:logger@1.0.0";
+  const interfaceUri = "ens/wraps.eth:logger@1.0.0";
 
   function createClient(logFunc?: LogFunc): PolywrapClient {
     return new PolywrapClient({
