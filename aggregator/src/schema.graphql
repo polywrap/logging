@@ -1,4 +1,4 @@
-#import * into Logger from "wrap://ens/wrappers.polywrap.eth:logger@1.0.0"
+#import * into Logger from "wrap://ens/wraps.eth:logger@1.0.0"
 #use { getImplementations } for Logger
 
 type Module {

@@ -15,7 +15,7 @@ describe("logging wrapper", () => {
   const wrapperUri = "test/wrapper";
   const pluginUri1 = "wrap://plugin/logger-1";
   const pluginUri2 = "wrap://plugin/logger-2";
-  const interfaceUri = "ens/wrappers.polywrap.eth:logger@1.0.0";
+  const interfaceUri = "ens/wraps.eth:logger@1.0.0";
 
   function createClient(logs: any[]): PolywrapClient {
     const loggerPlugin = PluginPackage.from(() => ({
