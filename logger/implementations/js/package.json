@@ -6,9 +6,7 @@
     "type": "git",
     "url": "https://github.com/polywrap/logging.git"
   },
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "version": "0.10.0-pre.10",
   "main": "build/index.js",
   "scripts": {
