@@ -1,0 +1,6 @@
+# TODO: change back to "ens/wraps.eth:logger@1.0.0" when this issue is fixed:
+# https://github.com/polywrap/toolchain/issues/1598
+
+#import { Module } into Logger from "ipfs/QmXTDAjwyBDVHXs18UrVLRByXyT1Jp87qkhv3fwg1rFG9F"
+
+type Module implements Logger_Module { }
