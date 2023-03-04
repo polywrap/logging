@@ -26,7 +26,7 @@ jobs:
         working-directory: ./logger/implementations/js
 
       - name: Read VERSION into env.RELEASE_VERSION
-        working-directory: ./implementations/js
+        working-directory: ./logger/implementations/js
         run: |
           echo RELEASE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g') >> $GITHUB_ENV
 
