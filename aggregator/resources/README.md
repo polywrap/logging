@@ -1,9 +1,9 @@
 # Logging Wrapper
-The logging wrapper is a simple dispatcher of messages, with pre-defined level of importance (debug, info, warn, error). Messages are forwarded to all implementations of the [`ens/wrappers.polywrap.eth:logger@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logger@1.0.0) interface. If no implementations are found, messages will simply not be forwarded.
+The logging wrapper is a simple dispatcher of messages, with pre-defined level of importance (debug, info, warn, error). Messages are forwarded to all implementations of the [`ens/wraps.eth:logger@1.0.0`](https://wrappers.io/v/ens/wraps.eth:logger@1.0.0) interface. If no implementations are found, messages will simply not be forwarded.
 
 | Version | URI | WRAP Standard |
 |-|-|-|
-| 1.0.0 | [`wrap://ens/wrappers.polywrap.eth:logging@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logging@1.0.0) | 0.1 |
+| 1.0.0 | [`wrap://ens/wraps.eth:logging@1.0.0`](https://wrappers.io/v/ens/wraps.eth:logging@1.0.0) | 0.1 |
 
 ## Interface
 ```graphql
@@ -32,7 +32,7 @@ type Module {
 ## Usage
 Import the logging module into your wrapper's schema:
 ```graphql
-#import * into Logging from "ens/wrappers.polywrap.eth:logging@1.0.0
+#import * into Logging from "ens/wraps.eth:logging@1.0.0
 
 type Module {
   yourMethodHere(
