@@ -1,14 +1,14 @@
 import {
   Module,
   Args_log,
-  Logger_LogLevel,
-  Logger_LogLevelEnum,
+  LogLevel,
+  LogLevelEnum,
   manifest,
 } from "./wrap";
 
 import { PluginFactory, PluginPackage } from "@polywrap/plugin-js";
 
-export type LogFunc = (level: Logger_LogLevel, message: string) => void;
+export type LogFunc = (level: LogLevel, message: string) => void;
 
 export interface LoggerPluginConfig {
   logFunc?: LogFunc;
@@ -23,19 +23,19 @@ export class LoggerPlugin extends Module<LoggerPluginConfig> {
 
     switch (args.level) {
       case "DEBUG":
-      case Logger_LogLevelEnum.DEBUG:
+      case LogLevelEnum.DEBUG:
         console.debug(args.message);
         break;
       case "WARN":
-      case Logger_LogLevelEnum.WARN:
+      case LogLevelEnum.WARN:
         console.warn(args.message);
         break;
       case "ERROR":
-      case Logger_LogLevelEnum.ERROR:
+      case LogLevelEnum.ERROR:
         console.error(args.message);
         break;
       case "INFO":
-      case Logger_LogLevelEnum.INFO:
+      case LogLevelEnum.INFO:
         console.log(args.message);
         break;
       default:
