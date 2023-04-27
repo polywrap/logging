@@ -3,8 +3,9 @@ project:
   name: logging-wrapper
   type: wasm/assemblyscript
 source:
-  schema: ./src/schema.graphql
+  schema: ./polywrap.graphql
   module: ./src/index.ts
+  import_abis:
+    - uri: wrap://ens/wraps.eth:logger@1.0.0
+      abi: ../logger/interface/polywrap.graphql
 resources: ./resources
-extensions:
-  deploy: ./polywrap.deploy.yaml
