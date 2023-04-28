@@ -7,48 +7,51 @@ import {
   Args_warn,
   Args_error,
   Args_loggers,
+  ModuleBase
 } from "./wrap";
 import { Args_log } from "./wrap/imported/Logger_Module/serialization";
 
-function log(args: Args_log): bool {
-  const uris = loggers({});
-  for (let i = 0; i < uris.length; i++) {
-    new Logger_Module(uris[i]).log({
-      message: args.message,
-      level: args.level,
-    }).unwrap();
+export class Module extends ModuleBase {
+  log(args: Args_log): bool {
+    const uris = this.loggers({});
+    for (let i = 0; i < uris.length; i++) {
+      new Logger_Module(uris[i]).log({
+        message: args.message,
+        level: args.level,
+      }).unwrap();
+    }
+    return true;
   }
-  return true;
-}
 
-export function debug(args: Args_debug): bool {
-  return log({
-    message: args.message,
-    level: Logger_LogLevel.DEBUG,
-  });
-}
+  debug(args: Args_debug): bool {
+    return this.log({
+      message: args.message,
+      level: Logger_LogLevel.DEBUG,
+    });
+  }
 
-export function info(args: Args_info): bool {
-  return log({
-    message: args.message,
-    level: Logger_LogLevel.INFO,
-  });
-}
+  info(args: Args_info): bool {
+    return this.log({
+      message: args.message,
+      level: Logger_LogLevel.INFO,
+    });
+  }
 
-export function warn(args: Args_warn): bool {
-  return log({
-    message: args.message,
-    level: Logger_LogLevel.WARN,
-  });
-}
+  warn(args: Args_warn): bool {
+    return this.log({
+      message: args.message,
+      level: Logger_LogLevel.WARN,
+    });
+  }
 
-export function error(args: Args_error): bool {
-  return log({
-    message: args.message,
-    level: Logger_LogLevel.ERROR,
-  });
-}
+  error(args: Args_error): bool {
+    return this.log({
+      message: args.message,
+      level: Logger_LogLevel.ERROR,
+    });
+  }
 
-export function loggers(_: Args_loggers): string[] {
-  return Logger.getImplementations();
+  loggers(_: Args_loggers): string[] {
+    return Logger.getImplementations();
+  }
 }

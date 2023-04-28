@@ -1,7 +1,7 @@
 import { PolywrapClient, ClientConfigBuilder } from "@polywrap/client-js";
 
 import { loggerPlugin, LogFunc } from "../..";
-import { Logger_LogLevel } from "../../wrap";
+import { LogLevel } from "../../wrap";
 
 const console_log = jest.spyOn(console, "log");
 const console_debug = jest.spyOn(console, "debug");
@@ -37,7 +37,7 @@ describe("loggerPlugin", () => {
     const client = createClient();
 
     async function testLevel(
-      level: Logger_LogLevel,
+      level: LogLevel,
       mock: jest.SpyInstance
     ): Promise<void> {
       const response = await client.invoke<boolean>({
