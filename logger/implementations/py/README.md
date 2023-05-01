@@ -1,5 +1,5 @@
 # Logger Python Plugin
-The Logger plugin implements the `logger-interface` from the `ens/wrappers.polywrap.eth:logger@1.0.0` package (see [./src/schema.graphql](./src/schema.graphql)). By default, it logs all events using the Python `logging` module. You can customize this behavior by setting the `Logger` property on the plugin's configuration object (examples below).
+The Logger plugin implements the `logger-interface` from the `ens/wraps.eth:logger@1.0.0` package (see [./src/schema.graphql](./src/schema.graphql)). By default, it logs all events using the Python `logging` module. You can customize this behavior by setting the `Logger` property on the plugin's configuration object (examples below).
 
 ## Usage
 ### 1. Configure Client
@@ -13,10 +13,10 @@ config = PolywrapClientConfigBuilder().set_package(
     uri=Uri.from_str("plugin/logger"),
     package=logger_plugin()
 ).set_interface(
-    interface=Uri.from_str("ens/wrappers.polywrap.eth:logger@1.0.0"),
+    interface=Uri.from_str("ens/wraps.eth:logger@1.0.0"),
     implementations=[Uri.from_str("plugin/logger")]
 ).set_redirect(
-    Uri.from_str("ens/wrappers.polywrap.eth:logger@1.0.0"),
+    Uri.from_str("ens/wraps.eth:logger@1.0.0"),
     Uri.from_str("plugin/logger")
 ).build()
 client = PolywrapClient(config)
@@ -26,7 +26,7 @@ client = PolywrapClient(config)
 Invocations to the logger plugin can be made via the interface URI (which will get redirected), or the plugin's URI directly:
 ```python
 await client.invoke({
-  'uri': 'ens/wrappers.polywrap.eth:logger@1.0.0' | 'plugin/logger',
+  'uri': 'ens/wraps.eth:logger@1.0.0' | 'plugin/logger',
   'method': 'log',
   'args': {
     'level': 'INFO',
@@ -42,10 +42,10 @@ config = PolywrapClientConfigBuilder().set_package(
     uri=Uri.from_str("plugin/logger"),
     package=logger_plugin(LoggerConfig(logger=YourLogger(), level=LogLevel.INFO))
 ).set_interface(
-    interface=Uri.from_str("ens/wrappers.polywrap.eth:logger@1.0.0"),
+    interface=Uri.from_str("ens/wraps.eth:logger@1.0.0"),
     implementations=[Uri.from_str("plugin/logger")]
 ).set_redirect(
-    Uri.from_str("ens/wrappers.polywrap.eth:logger@1.0.0"),
+    Uri.from_str("ens/wraps.eth:logger@1.0.0"),
     Uri.from_str("plugin/logger")
 ).build()
 ```
@@ -57,7 +57,7 @@ config = PolywrapClientConfigBuilder().set_package(
     uri=Uri.from_str("plugin/logger"),
     package=logger_plugin(LoggerConfig(logger=YourLogger(), level=LogLevel.INFO))
 ).set_interface(
-    interface=Uri.from_str("ens/wrappers.polywrap.eth:logger@1.0.0"),
+    interface=Uri.from_str("ens/wraps.eth:logger@1.0.0"),
     implementations=[Uri.from_str("plugin/logger"), Uri.from_str("plugin/custom-logger")]
 ).set_package(
     uri=Uri.from_str("plugin/custom-logger"),
@@ -68,7 +68,7 @@ config = PolywrapClientConfigBuilder().set_package(
 ### 5. Invoke All Logger Implementations
 When you'd like to log something to more than one logger, you can invoke all implementations of the logger interface:
 ```python
-implementations = client.get_implementations('ens/wrappers.polywrap.eth:logger@1.0.0')
+implementations = client.get_implementations('ens/wraps.eth:logger@1.0.0')
 
 for impl in implementations:
     await client.invoke({
