@@ -13,7 +13,6 @@ packages = [{include = "polywrap_logger_plugin"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 polywrap-plugin = "0.1.0a29"
-httpx = "^0.23.3"
 polywrap-core = "^0.1.0a29"
 polywrap-msgpack = "^0.1.0a29"
 polywrap-manifest = "^0.1.0a29"
