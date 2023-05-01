@@ -1,0 +1,31 @@
+{
+  "folders": [
+      {
+        "name": "root",
+        "path": "."
+      },
+      {
+        "name": "interface",
+        "path": "logger/interface"
+      },
+      {
+          "name": "python-plugin",
+          "path": "logger/implementations/py"
+      },
+      {
+          "name": "javascript-plugin",
+          "path": "logger/implementations/js"
+      },
+      {
+          "name": "aggregator",
+          "path": "aggregator"
+      },
+  ],
+  "settings": {
+      "files.exclude": {
+        "**/logger/*": true,
+        "**/aggregator/*": true
+      },
+      "liveServer.settings.multiRootWorkspaceName": "root",
+  }
+}
