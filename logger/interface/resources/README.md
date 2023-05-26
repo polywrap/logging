@@ -1,38 +1,62 @@
-# Logger Wrapper Interface
-A simple logger interface, to be implemented by a wrapper.
+# Logging Wrapper Interface
 
-| Version | URI | WRAP Standard |
+| Version | URI | WRAP Version |
 |-|-|-|
-| 1.0.0 | [`wrap://ens/wrappers.polywrap.eth:logger@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logger@1.0.0) | 0.1 |
+| 1.0.0 | [`wrap://ens/wraps.eth:logging@1.0.0`](https://wrappers.io/v/ens/wraps.eth:logging@1.0.0) | 0.1 |
 
 ## Interface
 ```graphql
-enum LogLevel {
-  DEBUG
-  INFO
-  WARN
-  ERROR
+type Module {
+    # Log a message
+    log(level: LogLevel!, message: String!, context: String): LogEntry!
+
+    trace(message: String!, context: String): LogEntry!
+    debug(message: String!, context: String): LogEntry!
+    info(message: String!, context: String): LogEntry!
+    warn(message: String!, context: String): LogEntry!
+    error(message: String!, context: String): LogEntry!
+    fatal(message: String!, context: String): LogEntry!
+
+    # Change the minimum log level at runtime
+    setLogLevel(level: LogLevel!): Boolean!
+
+    # Get the current log level
+    getLogLevel: LogLevel!
+
+    # Get a specific log entry by ID
+    getLog(id: Int!): LogEntry
+
+    # Get a list of logs, optionally by log level
+    getLogs(level: LogLevel): [LogEntry!]!
 }
 
-type Module {
-  log(
+enum LogLevel {
+    TRACE
+    DEBUG
+    INFO
+    WARN
+    ERROR
+    FATAL
+}
+
+type LogEntry {
+    id: Int!
+    timestamp: String! # ISO 8601 format
     level: LogLevel!
     message: String!
-  ): Boolean!
+    context: String
 }
 ```
 
 ## Usage
 ```graphql
-#import { Module } into ILogger from "ens/wrappers.polywrap.eth:logger@1.0.0"
-
-type Module implements ILogger_Module { }
+#import * from "ens/wraps.eth:logging@1.0.0"
 ```
 
-And implement the `log` method within your programming language of choice.
+And implement the interface methods within your programming language of choice.
+
+## Source Code
+[Link](https://github.com/polywrap/std/logging)
 
 ## Known Implementations
-* [`@polywrap/logger-plugin-js`](https://www.npmjs.com/package/@polywrap/logger-plugin-js) - JavaScript Plugin  
-
-## Known Aggregators
-* `logging-wrapper` @ [`ens/wrappers.polywrap.eth:logging@1.0.0`](https://wrappers.io/v/ens/wrappers.polywrap.eth:logging@1.0.0) - Wasm Wrapper  
+[Link](https://github.com/polywrap/logging/tree/master/implementations)
