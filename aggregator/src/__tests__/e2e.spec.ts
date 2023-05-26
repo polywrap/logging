@@ -25,31 +25,19 @@ describe("logging wrapper", () => {
       },
     }));
 
-    const configBuilder = new ClientConfigBuilder();
+    const config = new ClientConfigBuilder()
+      .addPackages({
+        [wrapperUri]: wrapper,
+        [pluginUri1]: loggerPlugin,
+        [pluginUri2]: loggerPlugin
+      })
+      .addInterfaceImplementations(
+        interfaceUri,
+        [pluginUri1, pluginUri2]
+      )
+      .build();
 
-    configBuilder.addPackages([
-      {
-        uri: wrapperUri,
-        package: wrapper
-      },
-      {
-        uri: pluginUri1,
-        package: loggerPlugin
-      },
-      {
-        uri: pluginUri2,
-        package: loggerPlugin
-      }
-    ]);
-    configBuilder.addInterfaceImplementations(
-      interfaceUri,
-      [pluginUri1, pluginUri2]
-    );
-
-    return new PolywrapClient(
-      configBuilder.buildCoreConfig(),
-      { noDefaults: true }
-    );
+    return new PolywrapClient(config);
   }
 
   it("dispatches message to all loggers", async () => {
@@ -115,18 +103,13 @@ describe("logging wrapper", () => {
   });
 
   it("succeeds if no loggers are found", async () => {
-    const configBuilder = new ClientConfigBuilder();
-    configBuilder.addPackages([
-      {
-        uri: wrapperUri,
-        package: wrapper
-      }
-    ]);
+    const config = new ClientConfigBuilder()
+      .addPackages({
+        [wrapperUri]: wrapper
+      })
+      .build();
 
-    const client = new PolywrapClient(
-      configBuilder.buildCoreConfig(),
-      { noDefaults: true }
-    );
+    const client = new PolywrapClient(config);
 
     const impls = await client.invoke<string[]>({
       uri: wrapperUri,

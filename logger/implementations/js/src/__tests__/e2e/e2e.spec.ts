@@ -1,7 +1,7 @@
-import { PolywrapClient } from "@polywrap/client-js";
+import { PolywrapClient, ClientConfigBuilder } from "@polywrap/client-js";
 
 import { loggerPlugin, LogFunc } from "../..";
-import { Logger_LogLevel } from "../../wrap";
+import { LogLevel } from "../../wrap";
 
 const console_log = jest.spyOn(console, "log");
 const console_debug = jest.spyOn(console, "debug");
@@ -14,20 +14,22 @@ describe("loggerPlugin", () => {
   const interfaceUri = "ens/wraps.eth:logger@1.0.0";
 
   function createClient(logFunc?: LogFunc): PolywrapClient {
-    return new PolywrapClient({
-      packages: [{
-        uri: pluginUri,
-        package: loggerPlugin({ logFunc })
-      }],
-      redirects: [{
-        from: interfaceUri,
-        to: pluginUri
-      }],
-      interfaces: [{
-        interface: interfaceUri,
-        implementations: [pluginUri]
-      }]
-    });
+    const config = new ClientConfigBuilder()
+      .addPackage(
+        pluginUri,
+        loggerPlugin({ logFunc })
+      )
+      .addRedirect(
+        interfaceUri,
+        pluginUri
+      )
+      .addInterfaceImplementation(
+        interfaceUri,
+        pluginUri
+      )
+      .build();
+
+    return new PolywrapClient(config);
   }
 
   it("logs to console appropriate level", async () => {
@@ -35,7 +37,7 @@ describe("loggerPlugin", () => {
     const client = createClient();
 
     async function testLevel(
-      level: Logger_LogLevel,
+      level: LogLevel,
       mock: jest.SpyInstance
     ): Promise<void> {
       const response = await client.invoke<boolean>({
@@ -80,26 +82,22 @@ describe("loggerPlugin", () => {
     const customLog1 = jest.fn();
     const customLog2 = jest.fn();
 
-    const client = new PolywrapClient({
-      packages: [
-        {
-          uri: "plugin/logger-1",
-          package: loggerPlugin({ logFunc: customLog1 })
-        },
-        {
-          uri: "plugin/logger-2",
-          package: loggerPlugin({ logFunc: customLog2 })
-        }
-      ],
-      redirects: [{
-        from: interfaceUri,
-        to: "plugin/logger-1"
-      }],
-      interfaces: [{
-        interface: interfaceUri,
-        implementations: ["plugin/logger-1", "plugin/logger-2"]
-      }]
-    });
+    const config = new ClientConfigBuilder()
+      .addPackages({
+        "plugin/logger-1": loggerPlugin({ logFunc: customLog1 }),
+        "plugin/logger-2": loggerPlugin({ logFunc: customLog2 })
+      })
+      .addRedirect(
+        interfaceUri,
+        "plugin/logger-1"
+      )
+      .addInterfaceImplementations(
+        interfaceUri,
+        ["plugin/logger-1", "plugin/logger-2"]
+      )
+      .build();
+
+    const client = new PolywrapClient(config);
 
     const implementations = await client.getImplementations(interfaceUri);
 
@@ -107,7 +105,7 @@ describe("loggerPlugin", () => {
 
     for (const implementation of implementations.value) {
       await client.invoke<boolean>({
-        uri: implementation,
+        uri: implementation.uri,
         method: "log",
         args: {
           level: "INFO",
