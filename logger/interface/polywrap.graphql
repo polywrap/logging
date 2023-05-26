@@ -1,13 +1,98 @@
-enum LogLevel {
-  DEBUG
-  INFO
-  WARN
-  ERROR
+type Module {
+    """
+    Logs a message with the specified log level, message content, and context, then returns the created LogEntry.
+    """
+    log(level: LogLevel!, message: String!, context: String): LogEntry!
+
+    """
+    Logs a trace-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    trace(message: String!, context: String): LogEntry!
+
+    """
+    Logs a debug-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    debug(message: String!, context: String): LogEntry!
+
+    """
+    Logs an info-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    info(message: String!, context: String): LogEntry!
+
+    """
+    Logs a warning-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    warn(message: String!, context: String): LogEntry!
+
+    """
+    Logs an error-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    error(message: String!, context: String): LogEntry!
+
+    """
+    Logs a fatal-level message with the specified message content and context, then returns the created LogEntry.
+    """
+    fatal(message: String!, context: String): LogEntry!
+
+    """
+    Changes the minimum log level at runtime, returning true if successful.
+    """
+    setLogLevel(level: LogLevel!): Boolean!
+
+    """
+    Returns the current log level.
+    """
+    getLogLevel: LogLevel!
+
+    """
+    Retrieves a specific log entry by its ID.
+    """
+    getLog(id: Int!): LogEntry
+
+    """
+    Retrieves a list of logs, optionally filtered by the specified log level.
+    """
+    getLogs(level: LogLevel): [LogEntry!]!
 }
 
-type Module {
-  log(
+"""
+Represents the various log levels.
+"""
+enum LogLevel {
+    TRACE
+    DEBUG
+    INFO
+    WARN
+    ERROR
+    FATAL
+}
+
+"""
+Defines the structure of a log entry.
+"""
+type LogEntry {
+    """
+    The unique identifier of the log entry.
+    """
+    id: Int!
+
+    """
+    The timestamp of the log entry in ISO 8601 format.
+    """
+    timestamp: String!
+
+    """
+    The log level of the log entry.
+    """
     level: LogLevel!
+
+    """
+    The message content of the log entry.
+    """
     message: String!
-  ): Boolean!
+
+    """
+    The context associated with the log entry, if any.
+    """
+    context: String
 }
