@@ -1,7 +1,7 @@
 import { PolywrapClient } from "@polywrap/client-js";
 import { PluginPackage } from "@polywrap/plugin-js";
 import { WasmPackage } from "@polywrap/wasm-js";
-import { ClientConfigBuilder } from "@polywrap/client-config-builder-js";
+import { PolywrapClientConfigBuilder } from "@polywrap/client-config-builder-js";
 import path from "path";
 import fs from "fs";
 
@@ -15,7 +15,7 @@ describe("logging wrapper", () => {
   const wrapperUri = "test/wrapper";
   const pluginUri1 = "wrap://plugin/logger-1";
   const pluginUri2 = "wrap://plugin/logger-2";
-  const interfaceUri = "ens/wraps.eth:logger@1.0.0";
+  const interfaceUri = "wrapscan.io/polywrap/logger@1.0";
 
   function createClient(logs: any[]): PolywrapClient {
     const loggerPlugin = PluginPackage.from(() => ({
@@ -25,8 +25,8 @@ describe("logging wrapper", () => {
       },
     }));
 
-    const config = new ClientConfigBuilder()
-      .addPackages({
+    const config = new PolywrapClientConfigBuilder()
+      .setPackages({
         [wrapperUri]: wrapper,
         [pluginUri1]: loggerPlugin,
         [pluginUri2]: loggerPlugin
@@ -103,8 +103,8 @@ describe("logging wrapper", () => {
   });
 
   it("succeeds if no loggers are found", async () => {
-    const config = new ClientConfigBuilder()
-      .addPackages({
+    const config = new PolywrapClientConfigBuilder()
+      .setPackages({
         [wrapperUri]: wrapper
       })
       .build();
