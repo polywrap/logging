@@ -1,0 +1,5 @@
+format: 0.1.0
+description: A simple dispatcher of messages, with pre-defined level of importance (debug, info, warn, error).
+website: https://polywrap.io
+repository: https://github.com/polywrap/logging
+readme: ./README.md
