@@ -1,5 +1,5 @@
 # @polywrap/logger-plugin-js
-The Logger plugin implements the `logger-interface` @ [ens/wraps.eth:logger@1.0.0](https://app.ens.domains/name/wraps.eth/details) (see [./src/schema.graphql](./src/schema.graphql)). By default, it logs all events using the Javascript `console` global object. You can circumvent this functionality by setting the `logFunc` property on the plugin's config (examples below).
+The Logger plugin implements the `logger-interface` @ [wrapscan.io/polywrap/logger@1.0.0](../../interface/) (see [./polywrap.graphql](./polywrap.graphql)). By default, it logs all events using the Javascript `console` global object. You can circumvent this functionality by setting the `logFunc` property on the plugin's config (examples below).
 
 ## Usage
 ### 1. Configure Client
@@ -16,12 +16,12 @@ const config = new ClientConfigBuilder()
   )
   // 2. Register this plugin as an implementation of the interface
   .addInterfaceImplementation(
-    "ens/wraps.eth:logger@1.0.0",
+    "wrapscan.io/polywrap/logger@1.0",
     "plugin/logger"
   )
   // 3. Redirect invocations @ the interface to the plugin (default impl)
   .addRedirect(
-    "ens/wraps.eth:logger@1.0.0",
+    "wrapscan.io/polywrap/logger@1.0",
     "plugin/logger"
   )
   .build();
@@ -33,7 +33,7 @@ const client = new PolywrapClient(config));
 Invocations to the logger plugin can be made via the interface URI (which will get redirected), or the plugin's URI directly:
 ```typescript
 await client.invoke({
-  uri: "ens/wraps.eth:logger@1.0.0" | "plugin/logger",
+  uri: "wrapscan.io/polywrap/logger@1.0" | "plugin/logger",
   method: "log",
   args: {
     level: "INFO",
@@ -72,11 +72,11 @@ const config = new ClientConfigBuilder()
     loggerPlugin({ logFunc: ... })
   )
   .addInterfaceImplementations(
-    "ens/wraps.eth:logger@1.0.0",
+    "wrapscan.io/polywrap/logger@1.0",
     ["plugin/logger", "plugin/custom-logger"]
   )
   .addRedirect(
-    "ens/wraps.eth:logger@1.0.0",
+    "wrapscan.io/polywrap/logger@1.0",
     "plugin/logger"
   )
   .build();
@@ -88,7 +88,7 @@ const client = new PolywrapClient(config);
 When you'd like to log something to more than one logger, you can invoke all implementations of the logger interface:
 ```typescript
 const result = await client.getImplementations(
-  "ens/wraps.eth:logger@1.0.0"
+  "wrapscan.io/polywrap/logger@1.0"
 );
 
 const implementations: string[] = result.ok ? result.value : [];

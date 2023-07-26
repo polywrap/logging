@@ -1,4 +1,4 @@
-import { PolywrapClient, ClientConfigBuilder } from "@polywrap/client-js";
+import { PolywrapClient, PolywrapClientConfigBuilder } from "@polywrap/client-js";
 
 import { loggerPlugin, LogFunc } from "../..";
 import { LogLevel } from "../../wrap";
@@ -11,15 +11,15 @@ const console_error = jest.spyOn(console, "error");
 describe("loggerPlugin", () => {
 
   const pluginUri = "plugin/logger";
-  const interfaceUri = "ens/wraps.eth:logger@1.0.0";
+  const interfaceUri = "wrapscan.io/polywrap/logger@1.0";
 
   function createClient(logFunc?: LogFunc): PolywrapClient {
-    const config = new ClientConfigBuilder()
-      .addPackage(
+    const config = new PolywrapClientConfigBuilder()
+      .setPackage(
         pluginUri,
         loggerPlugin({ logFunc })
       )
-      .addRedirect(
+      .setRedirect(
         interfaceUri,
         pluginUri
       )
@@ -82,12 +82,12 @@ describe("loggerPlugin", () => {
     const customLog1 = jest.fn();
     const customLog2 = jest.fn();
 
-    const config = new ClientConfigBuilder()
-      .addPackages({
+    const config = new PolywrapClientConfigBuilder()
+      .setPackages({
         "plugin/logger-1": loggerPlugin({ logFunc: customLog1 }),
         "plugin/logger-2": loggerPlugin({ logFunc: customLog2 })
       })
-      .addRedirect(
+      .setRedirect(
         interfaceUri,
         "plugin/logger-1"
       )
