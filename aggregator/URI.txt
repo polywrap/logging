@@ -1,1 +1,1 @@
-wrap://ipfs/QmY6AVWqdh73RPcqdJHG96HZs6gPDHGd5BewoPYFEbMnxf
+wrap://http/https://wraps.wrapscan.io/r/polywrap/logging@1.0.0
