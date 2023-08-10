@@ -1,0 +1,13 @@
+{
+  "name": "logger-plugin",
+  "description": "Polywrap Logger Kotlin Plugin",
+  "version": "0.10.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polywrap/logging.git"
+  },
+  "devDependencies": {
+    "polywrap": "0.11.0"
+  }
+}
