@@ -1,4 +1,4 @@
-# @polywrap/logger-plugin-js
+# Logger Plugin
 The Logger plugin implements the `logger-interface` @ [wrapscan.io/polywrap/logger@1.0.0](../../interface/) (see [./polywrap.graphql](./polywrap.graphql)). The plugin makes it possible to log messages from a Wasm Wrap.
 
 ## Installation
