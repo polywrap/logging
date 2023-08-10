@@ -57,7 +57,7 @@ afterEvaluate {
 
         publications.create<MavenPublication>("jvm") {
             from(components["kotlin"])
-            artifactId = "file-system-plugin"
+            artifactId = "logger-plugin"
         }
 
         // Configure all publications
