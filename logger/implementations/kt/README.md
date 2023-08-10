@@ -45,7 +45,7 @@ val client = polywrapClient {
         "plugin/logger"
     )
     // 3. Redirect invocations @ the interface to the plugin (default impl)
-    addRedirect("wrapscan.io/polywrap/logger@1.0" to "plugin/logger")
+    setRedirect("wrapscan.io/polywrap/logger@1.0" to "plugin/logger")
 }
 ```
 
