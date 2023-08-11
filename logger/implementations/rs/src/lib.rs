@@ -28,6 +28,16 @@ pub struct LoggerPlugin {
     config: LoggerPluginConfig,
 }
 
+impl LoggerPlugin {
+    fn new(custom_logger: Option<Box<dyn LogFuncTrait>>) -> Self {
+        Self {
+            config: LoggerPluginConfig {
+                log_func: custom_logger
+            }
+        }
+    }
+}
+
 #[plugin_impl]
 impl Module for LoggerPlugin {
     fn log(&mut self, args: &ArgsLog, _: Arc<dyn Invoker>) -> Result<bool, PluginError> {
@@ -112,9 +122,7 @@ mod tests {
         };
 
         let mut builder = PolywrapClientConfig::new();
-        let logger_plugin = LoggerPlugin {
-            config: LoggerPluginConfig { log_func: None },
-        };
+        let logger_plugin = LoggerPlugin::new(None);
         let logger_package: PluginPackage<LoggerPlugin> = PluginPackage::from(logger_plugin);
         builder.add_package(uri!("plugin/logger"), Arc::new(logger_package));
         let client = PolywrapClient::new(builder.build());
