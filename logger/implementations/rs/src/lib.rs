@@ -29,7 +29,7 @@ pub struct LoggerPlugin {
 }
 
 impl LoggerPlugin {
-    fn new(custom_logger: Option<Box<dyn LogFuncTrait>>) -> Self {
+    pub fn new(custom_logger: Option<Box<dyn LogFuncTrait>>) -> Self {
         Self {
             config: LoggerPluginConfig {
                 log_func: custom_logger

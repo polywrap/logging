@@ -4,7 +4,7 @@ description = "Polywrap rust logger plugin"
 license = "MIT"
 edition = "2021"
 rust-version = "1.69"
-version = "0.0.1"
+version = "0.0.2-beta.2"
 
 [dependencies]
 polywrap_core = "0.1.6-beta.13"
