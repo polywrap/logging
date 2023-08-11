@@ -19,5 +19,5 @@ thiserror = "1.0.40"
 log = "0.4.17"
 
 [dev-dependencies]
-polywrap_client.workspace = "0.1.6-beta.13"
+polywrap_client = "0.1.6-beta.13"
 env_logger = "0.9"  # for initializing the logger during tests
