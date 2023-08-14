@@ -55,11 +55,6 @@ afterEvaluate {
             }
         }
 
-        publications.create<MavenPublication>("jvm") {
-            from(components["kotlin"])
-            artifactId = "logger-plugin"
-        }
-
         // Configure all publications
         publications.withType<MavenPublication> {
             // Stub javadoc.jar artifact
@@ -101,4 +96,20 @@ signing {
         getExtraString("signing.password"),
     )
     sign(publishing.publications)
+}
+
+tasks.withType<PublishToMavenRepository> {
+    dependsOn(
+        "signJvmPublication",
+        "signAndroidReleasePublication",
+        "signKotlinMultiplatformPublication"
+    )
+}
+
+tasks.withType<PublishToMavenLocal> {
+    dependsOn(
+        "signJvmPublication",
+        "signAndroidReleasePublication",
+        "signKotlinMultiplatformPublication"
+    )
 }

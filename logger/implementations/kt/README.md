@@ -6,14 +6,14 @@ The Logger plugin implements the `logger-interface` @ [wrapscan.io/polywrap/logg
 Kotlin
 ```kotlin
 dependencies {
-    implementation("io.polywrap:logger-plugin:0.10.0-SNAPSHOT")
+    implementation("io.polywrap.plugins:logger-plugin:0.10.0-SNAPSHOT")
 }
 ```
 
 Groovy
 ```groovy
 dependencies {
-    implementation "io.polywrap:logger-plugin:0.10.0-SNAPSHOT"
+    implementation "io.polywrap.plugins:logger-plugin:0.10.0-SNAPSHOT"
 }
 ```
 
