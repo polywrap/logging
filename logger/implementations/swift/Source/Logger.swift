@@ -1,7 +1,7 @@
 import OSLog
 import PolywrapClient
 
-typealias LogFunc = (LogLevel, String) -> Void
+public typealias LogFunc = (LogLevel, String) -> Void
 
 extension Logger {
     /// Using your bundle identifier is a great way to ensure a unique identifier.
@@ -14,16 +14,15 @@ extension Logger {
     static let statistics = Logger(subsystem: subsystem, category: "statistics")
 }
 
-class LoggerPlugin: Plugin {
-    var methodsMap: [String : PluginMethod] = [:]
-    
-    private let config: LogFunc?
+public class LoggerPlugin: Plugin {
+    public var methodsMap: [String : PluginMethod] = [:]
+    public let config: LogFunc?
 
     public init(config: LogFunc?) {
         self.config = config
     }
 
-    func log(_ args: ArgsLog, _ env: VoidCodable?, _ invoker: Invoker) -> Bool {
+    public func log(_ args: ArgsLog, _ env: VoidCodable?, _ invoker: Invoker) -> Bool {
         if let logFunc = config {
             logFunc(args.level, args.message)
             return true
@@ -44,7 +43,7 @@ class LoggerPlugin: Plugin {
     }
 }
 
-func getLoggerPlugin(logFunc: LogFunc?) -> LoggerPlugin {
+public func getLoggerPlugin(_ logFunc: LogFunc?) -> LoggerPlugin {
     var plugin = LoggerPlugin(config: logFunc)
     plugin.addMethod(name: "log", closure: plugin.log)
     return plugin
