@@ -26,7 +26,12 @@ let package = Package(
                 .product(name: "PolywrapClient", package: "swift-client"),
             ],
             path: "Source"
-        )
+        ),
+        .testTarget(
+            name: "LoggerPluginTests",
+            dependencies: ["LoggerPlugin"],
+            path: "Tests"
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )

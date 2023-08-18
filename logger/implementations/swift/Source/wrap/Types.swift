@@ -16,8 +16,8 @@ import Foundation
 
 // Enums START //
 
-public enum LogLevel: String, Codable {
-    case DEBUG
+public enum LogLevel: Int, Codable {
+    case DEBUG = 0
     case INFO
     case WARN
     case ERROR
