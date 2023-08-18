@@ -17,6 +17,6 @@ final class LoggerPluginTests: XCTestCase {
         let args = ArgsLog(level: LogLevel.INFO, message: "Hallo!")
         
         let response: Bool = try client.invoke(uri: uri, method: "log", args: args)
-        print(response)
+        XCTAssert(response)
     }
 }
