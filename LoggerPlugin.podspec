@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.source_files = 'logger/implementations/swift/Source/**/*.swift'
     s.swift_version  = "5.0"
     s.ios.deployment_target = '14.0'
-    s.source = { :git => "https://github.com/polywrap/logging.git", :branch => 'feat/swift-implementation' }
+    s.source = { :git => "https://github.com/polywrap/logging.git", :branch => 'main' }
     s.static_framework = true
-    s.dependency 'PolywrapClient', '~> 0.0.6'
+    s.dependency 'PolywrapClient', '~> 0.0.7'
 end
