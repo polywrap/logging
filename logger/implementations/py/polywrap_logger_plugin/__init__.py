@@ -9,7 +9,6 @@ from .wrap import (
     InvokerClient,
     LogLevel,
     Module,
-    UriPackageOrWrapper,
     manifest,
 )
 
@@ -30,10 +29,10 @@ class LoggerModule(Module[LoggerConfig]):
         self.logger = self.config.logger
         self.logger.setLevel(self.config.level.name)
 
-    async def log(
+    def log(
         self,
         args: ArgsLog,
-        client: InvokerClient[UriPackageOrWrapper],
+        client: InvokerClient,
         env: None
     ) -> bool:
         """Logs a message."""

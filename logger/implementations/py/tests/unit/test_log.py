@@ -1,5 +1,4 @@
 import logging
-from polywrap_client import UriPackageOrWrapper
 from polywrap_core import InvokerClient
 import pytest
 from polywrap_logger_plugin import LoggerConfig, LoggerModule, ArgsLog, LogLevel
@@ -19,7 +18,7 @@ async def test_log_levels(
     logger_module = LoggerModule(valid_logger_config(config_level))
     args_log = ArgsLog(message="Test message", level=log_level)
 
-    assert await logger_module.log(args_log, cast(InvokerClient[UriPackageOrWrapper], None), None)
+    assert logger_module.log(args_log, cast(InvokerClient, None), None)
     last_record = caplog.records[-1] if caplog.records else None
 
     if log_level.value >= config_level.value:

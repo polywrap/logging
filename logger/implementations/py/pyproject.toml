@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "polywrap-logger-plugin"
-version = "0.1.0a1"
+version = "0.1.2"
 description = ""
 authors = ["Niraj <niraj@polywrap.io>"]
 readme = "README.md"
@@ -12,13 +12,13 @@ packages = [{include = "polywrap_logger_plugin"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-polywrap-plugin = "0.1.0a29"
-polywrap-core = "^0.1.0a29"
-polywrap-msgpack = "^0.1.0a29"
-polywrap-manifest = "^0.1.0a29"
+polywrap-plugin = "0.1.2"
+polywrap-core = "^0.1.2"
+polywrap-msgpack = "^0.1.2"
+polywrap-manifest = "^0.1.2"
 
 [tool.poetry.group.dev.dependencies]
-polywrap-client = "0.1.0a29"
+polywrap-client = "0.1.2"
 black = "^23.1.0"
 pytest = "^7.2.1"
 pytest-asyncio = "^0.20.3"
@@ -26,8 +26,8 @@ isort = "^5.12.0"
 bandit = "^1.7.4"
 pyright = "^1.1.296"
 pylint = "^2.16.3"
-polywrap-uri-resolvers = "^0.1.0a29"
-polywrap-client-config-builder = "^0.1.0a29"
+polywrap-uri-resolvers = "^0.1.2"
+polywrap-client-config-builder = "^0.1.2"
 tox = "^3.26.0"
 tox-poetry = "^0.4.1"
 pytest-mock = "^3.10.0"
